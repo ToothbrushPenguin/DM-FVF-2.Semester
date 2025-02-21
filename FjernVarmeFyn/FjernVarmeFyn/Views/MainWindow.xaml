@@ -13,11 +13,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
+            
         </Grid.ColumnDefinitions>
 
         <Grid Background="Black"
@@ -73,7 +79,7 @@
             <Button
              Content="Systemer"
              BorderThickness="0" Foreground="White"
-             Grid.Column="1" FontSize="12"
+             Grid.Column="1" FontSize="14"
       >
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
@@ -103,7 +109,7 @@
             <Button
              Content="Feedback"
              BorderThickness="0" Foreground="White"
-            Grid.Column="2" FontSize="12"
+            Grid.Column="2" FontSize="14"
 >
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
@@ -133,7 +139,7 @@
             <Button
             Content="Sendt feedback"
             BorderThickness="0" Foreground="White"
-            Grid.Column="3" FontSize="10"
+            Grid.Column="3" FontSize="12"
 >
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
@@ -163,7 +169,7 @@
             <Button
             Content="Statistik"
             BorderThickness="0" Foreground="White"
-            Grid.Column="4" FontSize="12"
+            Grid.Column="4" FontSize="14"
 >
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
@@ -194,7 +200,7 @@
             <Button
             Content="Domæner"
             BorderThickness="0" Foreground="White"
-            Grid.Column="5" FontSize="12"
+            Grid.Column="5" FontSize="14s"
 >
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
