@@ -53,7 +53,7 @@
 
         <!-- Main Content Area -->
         <Grid Grid.Row="1">
-            <!-- Your content goes here -->
+            <Frame x:Name="MainFrame"/>
         </Grid>
     </Grid>
 </Window>

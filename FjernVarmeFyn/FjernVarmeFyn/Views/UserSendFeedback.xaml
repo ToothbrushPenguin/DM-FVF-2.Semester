@@ -1,0 +1,211 @@
+﻿<Page x:Class="FjernVarmeFyn.Views.UserSendFeedback"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FjernVarmeFyn.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="UserSendFeedback">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <!-- Left side for the existing content -->
+            <ColumnDefinition Width="3*"/>
+            <!-- Right side for new content -->
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Search Bar at the top -->
+        <DockPanel Grid.Row="0" Grid.Column="0" LastChildFill="True" Margin="0,0,15,10">
+            <TextBlock Text="Søg:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBox VerticalAlignment="Center" Height="24"/>
+        </DockPanel>
+
+        <!-- Left side with ListBox -->
+        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,15,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <TextBlock Text="Din feedback" 
+                      FontSize="18" 
+                      FontWeight="SemiBold" 
+                      Margin="0,0,0,10"
+                      Grid.Row="0"/>
+
+            <!-- Filtering and Sorting Options -->
+            <Grid Grid.Row="1" Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Group Filter -->
+                <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="0,0,15,0">
+                    <TextBlock Text="Gruppe:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ComboBox Width="100" SelectedIndex="0">
+                        <ComboBoxItem Content="Alle"/>
+                        <ComboBoxItem Content="Gruppe 1"/>
+                        <ComboBoxItem Content="Gruppe 2"/>
+                        <ComboBoxItem Content="Gruppe 3"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- System Filter -->
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="0,0,15,0">
+                    <TextBlock Text="System:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ComboBox Width="100" SelectedIndex="0">
+                        <ComboBoxItem Content="Alle"/>
+                        <ComboBoxItem Content="System 1"/>
+                        <ComboBoxItem Content="System 2"/>
+                        <ComboBoxItem Content="System 3"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- Type Filter (Wishes/Feedback) -->
+                <StackPanel Orientation="Horizontal" Grid.Column="2" Margin="0,0,15,0">
+                    <TextBlock Text="Type:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ComboBox Width="100" SelectedIndex="0">
+                        <ComboBoxItem Content="Alle"/>
+                        <ComboBoxItem Content="Ønsker"/>
+                        <ComboBoxItem Content="Feedback"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- Status Filter -->
+                <StackPanel Orientation="Horizontal" Grid.Column="3">
+                    <TextBlock Text="Status:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ComboBox Width="100" SelectedIndex="0">
+                        <ComboBoxItem Content="Alle"/>
+                        <ComboBoxItem Content="Åben"/>
+                        <ComboBoxItem Content="Lukket"/>
+                        <ComboBoxItem Content="Under behandling"/>
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+
+            <!-- Feedback ListView with DataTemplate -->
+            <ListView Grid.Row="2" 
+                     BorderThickness="1" 
+                     BorderBrush="#CCCCCC"
+                     Margin="0,5,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Feedback Details Row -->
+                            <StackPanel Grid.Column="0" Grid.Row="0">
+                                <TextBlock Text="{Binding Emne}" FontWeight="SemiBold"/>
+                                <TextBlock>
+                                    <Run Text="Ticket: "/>
+                                    <Run Text="{Binding Ticket}"/>
+                                    <Run Text=" | System: "/>
+                                    <Run Text="{Binding System}"/>
+                                    <Run Text=" | Status: "/>
+                                    <Run Text="{Binding Status}"/>
+                                </TextBlock> 
+                            </StackPanel>
+
+                            <!-- User Priority (Fixed Label) -->
+                            <StackPanel Grid.Column="1" Grid.Row="0" Margin="10,0,10,0">
+                                <TextBlock Text="User Priority:" FontSize="11"/>
+                                <TextBlock Text="{Binding UserPriority}" FontWeight="SemiBold"/>
+                            </StackPanel>
+
+                            <!-- Your Priority (Editable) -->
+                            <StackPanel Grid.Column="2" Grid.Row="0" Margin="0,0,10,0">
+                                <TextBlock Text="Your Priority:" FontSize="11"/>
+                                <TextBox Text="{Binding YourPriority}" Width="60" Height="22"/>
+                            </StackPanel>
+
+                            <!-- Action Buttons -->
+                            <Button Grid.Column="3" Grid.Row="0" Content="Læs kommentar" Padding="5,3" Margin="0,0,5,0"/>
+                            <Button Grid.Column="4" Grid.Row="0" Content="Slet" Padding="5,3"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <!-- These are placeholder items - in a real app you'd bind to a collection -->
+                <ListViewItem Content="Problem med login"/>
+                <ListViewItem Content="Fejl i rapportmodul"/>
+                <ListViewItem Content="Forslag til ny funktion"/>
+            </ListView>
+
+            <!-- Bottom Buttons -->
+            <Grid Grid.Row="3" Margin="0,15,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Content="Tilbage" Width="80" Padding="5,3" Grid.Column="0"/>
+                <Button Content="Indsend" Width="80" Padding="5,3" Grid.Column="2"/>
+            </Grid>
+        </Grid>
+
+        <!-- Right side area for additional content -->
+        <Border Grid.Row="1" Grid.Column="1" 
+                BorderThickness="1" 
+                BorderBrush="#CCCCCC" 
+                Margin="15,0,0,0"
+                Background="#F9F9F9">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Detaljer" 
+                           FontSize="16" 
+                           FontWeight="SemiBold" 
+                           Margin="10,10,10,5"
+                           Grid.Row="0"/>
+
+                <!-- Empty space for your additional content -->
+                <Border Grid.Row="1" 
+                        BorderThickness="1" 
+                        BorderBrush="#DDDDDD" 
+                        Background="White" 
+                        Margin="10,0,10,10">
+                    <!-- Add your new content here -->
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+
+    <!-- You'll need to add this class to your project -->
+    <Page.Resources>
+        <XmlDataProvider x:Key="FeedbackData" XPath="FeedbackItems/FeedbackItem">
+            <x:XData>
+                <FeedbackItems xmlns="">
+                    <!-- Sample data would go here in a real application -->
+                </FeedbackItems>
+            </x:XData>
+        </XmlDataProvider>
+    </Page.Resources>
+</Page>
