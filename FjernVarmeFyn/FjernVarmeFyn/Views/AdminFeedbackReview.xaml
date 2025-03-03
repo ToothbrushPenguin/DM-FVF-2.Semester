@@ -1,4 +1,4 @@
-﻿<Page x:Class="FjernVarmeFyn.Views.UserSendFeedback"
+﻿<Page x:Class="FjernVarmeFyn.Views.AdminFeedbackReview"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +7,7 @@
       xmlns:root="clr-namespace:FjernVarmeFyn"
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="2000"
-      Title="UserSendFeedback">
+      Title="AdminFeedbackReview">
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -29,11 +29,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
-                
             </Grid.RowDefinitions>
-
-
-            
 
             <!-- Filtering and Sorting Options -->
             <Grid Grid.Row="1" Margin="0,0,0,10">
@@ -147,8 +143,14 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        
-
+                        <!-- TextField 2: Admin Priority -->
+                        <GridViewColumn Header="Admin Priority" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding AdminPriority, Mode=TwoWay}" Width="80" Margin="5"  HorizontalContentAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
                         <!-- TextField 1: User Priority -->
                         <GridViewColumn Header="Priority" Width="Auto">
@@ -164,20 +166,21 @@
                 <!-- Sample items for design-time preview -->
                 <ListViewItem>
                     <ListViewItem.Content>
-                        <root:TempFeedbackModel Emne="Problem med login" Ticket="T-1001" System="Login" Status="Åben" Priority="5"/>
+                        <root:TempFeedbackModel Emne="Problem med login" Ticket="T-1001" System="Login" Status="Åben" AdminPriority="2" Priority="5"/>
                     </ListViewItem.Content>
                 </ListViewItem>
                 <ListViewItem>
                     <ListViewItem.Content>
-                        <root:TempFeedbackModel Emne="Fejl i rapportmodul" Ticket="T-1002" System="Rapporter" Status="Under behandling" Priority="3"/>
+                        <root:TempFeedbackModel Emne="Fejl i rapportmodul" Ticket="T-1002" System="Rapporter" Status="Under behandling" AdminPriority="1" Priority="3"/>
                     </ListViewItem.Content>
                 </ListViewItem>
                 <ListViewItem>
                     <ListViewItem.Content>
-                        <root:TempFeedbackModel Emne="Forslag til ny funktion" Ticket="T-1003" System="Dashboard" Status="Åben" Priority="4"/>
+                        <root:TempFeedbackModel Emne="Forslag til ny funktion" Ticket="T-1003" System="Dashboard" Status="Åben" AdminPriority="3" Priority="4"/>
                     </ListViewItem.Content>
                 </ListViewItem>
             </ListView>
+
             <!-- Search Bar -->
             <DockPanel Grid.Row="3" LastChildFill="True" Margin="0,10,0,10">
                 <TextBlock Text="Søg:" VerticalAlignment="Center" Margin="0,0,10,0"/>
@@ -203,41 +206,43 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Emne Section  -->
+                    <!-- Emne Section - Spans both columns -->
                     <GroupBox Header="Emne" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
-                        <TextBox Text="{Binding Emne}" TextWrapping="Wrap" Margin="5"/>
+                        <TextBlock Text="{Binding Emne}" TextWrapping="Wrap" Margin="5"/>
                     </GroupBox>
 
-                    <!-- System Section -->
+                    <!-- System Section - Now before Ticket and spans both columns -->
                     <GroupBox Header="System" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
-                        <TextBox Text="{Binding System}" Margin="5"/>
+                        <TextBlock Text="{Binding System}" Margin="5"/>
                     </GroupBox>
 
-                    <!-- Ticket Section -->
+                    <!-- Ticket Section - Moved to row 2 -->
                     <GroupBox Header="Ticket" Grid.Row="2" Grid.Column="0" Margin="5">
-                        <TextBox Text="{Binding Ticket}" Margin="5"/>
+                        <TextBlock Text="{Binding Ticket}" Margin="5"/>
                     </GroupBox>
 
-                    <!-- Status Section -->
+                    <!-- Status Section - Moved to row 2 -->
                     <GroupBox Header="Status" Grid.Row="2" Grid.Column="1" Margin="5">
-                        <TextBox Text="{Binding Status}" Margin="5"/>
+                        <TextBlock Text="{Binding Status}" Margin="5"/>
                     </GroupBox>
-                    <!-- User Priority Section -->
+
+                    <!-- Priority Sections - Now separated -->
+                    <!-- User Priority Section - Moved down one row -->
                     <GroupBox Header="Priority" Grid.Row="3" Grid.Column="1" Margin="5,5,5,2.5">
-                        <TextBox Text="{Binding Priority}" Margin="5"/>
+                        <TextBlock Text="{Binding Priority}" Margin="5"/>
                     </GroupBox>
 
                     <!-- Admin Priority Section -->
                     <GroupBox Header="Admin Priority" Grid.Row="3" Grid.Column="0" Margin="5,2.5,5,5">
-                        <TextBox Text="{Binding AdminPriority}" Margin="5"/>
+                        <TextBlock Text="{Binding AdminPriority}" Margin="5"/>
                     </GroupBox>
 
-                    <!-- Description Section  -->
+                    <!-- Description Section - Below everything else -->
                     <GroupBox Header="Beskrivelse" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
                         <TextBox Text="{Binding Description}" 
                                 TextWrapping="Wrap" 
                                 AcceptsReturn="True"
-                                
+                                IsReadOnly="True"
                                 VerticalScrollBarVisibility="Auto"
                                 MinHeight="200"
                                 Margin="5"
