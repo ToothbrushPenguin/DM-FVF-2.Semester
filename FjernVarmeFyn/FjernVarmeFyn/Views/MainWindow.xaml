@@ -45,15 +45,15 @@
         <UniformGrid Rows="1" Background="Black" Grid.Row="0">
             <Button Content="Velkommen" Style="{StaticResource NavButtonStyle}" FontSize="12"/>
             <Button Content="Systemer" Style="{StaticResource NavButtonStyle}" FontSize="14"/>
-            <Button Content="Feedback" Style="{StaticResource NavButtonStyle}" FontSize="14"/>
-            <Button Content="Sendt feedback" Style="{StaticResource NavButtonStyle}" FontSize="12"/>
+            <Button Content="Feedback" Style="{StaticResource NavButtonStyle}" FontSize="14" Click="FeedBack_Click"/>
+            <Button Content="Sendt feedback" Style="{StaticResource NavButtonStyle}" FontSize="12" Click="SendtFeedBack_Click"/>
             <Button Content="Statistik" Style="{StaticResource NavButtonStyle}" FontSize="14"/>
             <Button Content="Domæner" Style="{StaticResource NavButtonStyle}" FontSize="14"/>
         </UniformGrid>
 
         <!-- Main Content Area -->
         <Grid Grid.Row="1">
-            <Frame x:Name="MainFrame"/>
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
         </Grid>
     </Grid>
 </Window>

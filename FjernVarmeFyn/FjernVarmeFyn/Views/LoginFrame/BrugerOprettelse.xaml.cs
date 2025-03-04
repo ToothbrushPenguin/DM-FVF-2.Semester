@@ -20,9 +20,17 @@ namespace FjernVarmeFyn.Views
     /// </summary>
     public partial class BrugerOprettelse : Page
     {
-        public BrugerOprettelse()
+        private LoginFrame frame;
+        public BrugerOprettelse(LoginFrame loginFrame)
         {
             InitializeComponent();
+            this.DataContext = loginFrame;
+            frame = loginFrame;
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            frame.PageHolder.Content = new Login(frame);
         }
     }
 }

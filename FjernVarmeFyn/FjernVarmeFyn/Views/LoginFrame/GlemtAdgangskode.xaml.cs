@@ -16,13 +16,21 @@ using System.Windows.Shapes;
 namespace FjernVarmeFyn.Views
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for GlemtAdgangskode.xaml
     /// </summary>
-    public partial class Login : Page
+    public partial class GlemtAdgangskode : Page
     {
-        public Login()
+        private LoginFrame frame;
+        public GlemtAdgangskode(LoginFrame loginFrame)
         {
             InitializeComponent();
+            this.DataContext = loginFrame;
+            frame = loginFrame;
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            frame.PageHolder.Content = new Login(frame);
         }
     }
 }
