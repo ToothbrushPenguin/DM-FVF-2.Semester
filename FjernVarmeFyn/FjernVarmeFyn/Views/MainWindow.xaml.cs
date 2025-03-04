@@ -23,5 +23,15 @@ namespace FjernVarmeFyn
             WindowState = WindowState.Maximized;
             MainFrame.Navigate(new UserSendFeedback());
         }
+
+        private void FeedBack_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new FeedbackPage());
+        }
+
+        private void SendtFeedBack_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new UserSendFeedback());
+        }
     }
 }
