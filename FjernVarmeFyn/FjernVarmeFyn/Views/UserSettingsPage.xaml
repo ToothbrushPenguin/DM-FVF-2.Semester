@@ -1,0 +1,46 @@
+﻿<Page x:Class="FjernVarmeFyn.Views.UserSettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FjernVarmeFyn.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserSettingsPage">
+
+    <Page.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Button Content="Tilbage" HorizontalAlignment="Left" Margin="10,408,0,0" VerticalAlignment="Top" Style="{StaticResource CustomButtonStyle}"/>
+        <Button Content="Gem" HorizontalAlignment="Left" Margin="453,225,0,0" VerticalAlignment="Top" Style="{StaticResource CustomButtonStyle}"/>
+        <Label Content="Brugerindstillinger" HorizontalAlignment="Center" Margin="0,52,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <TextBox TextWrapping="Wrap" Text="Brugernavn" Margin="322,117,322,310"/>
+        <TextBox TextWrapping="Wrap" Text="E-Mail" Margin="322,155,322,272"/>
+        <TextBox TextWrapping="Wrap" Text="Telefon nummber" Margin="322,192,322,235"/>
+
+    </Grid>
+</Page>
