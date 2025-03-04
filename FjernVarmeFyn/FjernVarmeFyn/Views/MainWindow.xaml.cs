@@ -33,5 +33,10 @@ namespace FjernVarmeFyn
         {
             MainFrame.Navigate(new UserSendFeedback());
         }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new UserSettingsPage());
+        }
     }
 }
