@@ -20,8 +20,8 @@ namespace FjernVarmeFyn
         public MainWindow()
         {
             InitializeComponent();
+            WindowState = WindowState.Maximized;
             MainFrame.Navigate(new UserSendFeedback());
-
         }
     }
 }

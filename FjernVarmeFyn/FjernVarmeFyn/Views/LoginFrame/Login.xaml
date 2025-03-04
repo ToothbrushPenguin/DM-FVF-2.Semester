@@ -10,19 +10,18 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
-            <Image Source="/Images/Logo.jpg"  
-        HorizontalAlignment="Center" Margin="0,0,0,0"/>
+            <Image x:Name="logoImage" Source="/Images/Logo.jpg" Margin="0,0,0,0"/>
         </StackPanel>
         
         <StackPanel Grid.Row="1" Grid.Column="1">
@@ -33,13 +32,13 @@
             <Label  Content="Adganskode" Margin="0,30,0,0">
             </Label>
             <TextBox></TextBox>
-            <Button Content="Login" Margin="165,10,0,0" Width="100"></Button>
+            <Button Content="Login" Margin="165,10,0,0" HorizontalAlignment="Right" Width="100" Click="Login_Click"></Button>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
-            <Button Content="Glemt adgangskode" Margin="0,30,45,100" Width="120" ></Button>
-            <Button Content="Opret bruger" Margin="0,30,0,100" Width="100"></Button>
-        </StackPanel>
+      
+            <Button Content="Glemt adgangskode" Margin="0,30,42,85" Width="120" Height="20" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" Click="GlemtKode_Click"></Button>
+        <Button Content="Opret bruger" Margin="0,30,0,85" Width="120" Height="20" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" Click="OpretBruger_Click"></Button>
+        
 
     </Grid>
 </Page>

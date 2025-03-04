@@ -10,19 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace FjernVarmeFyn.Views
 {
     /// <summary>
-    /// Interaction logic for GlemtAdgangskode.xaml
+    /// Interaction logic for LoginFrame.xaml
     /// </summary>
-    public partial class GlemtAdgangskode : Page
+    public partial class LoginFrame : Window
     {
-        public GlemtAdgangskode()
+        private LoginFrame loginFrame;
+        public LoginFrame()
         {
             InitializeComponent();
+            loginFrame = this;
+            this.DataContext = loginFrame;
+
+            this.PageHolder.Content = new Login(loginFrame);
         }
     }
 }
