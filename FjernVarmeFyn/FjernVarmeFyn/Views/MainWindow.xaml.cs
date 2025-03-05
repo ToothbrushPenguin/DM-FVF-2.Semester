@@ -70,5 +70,14 @@ namespace FjernVarmeFyn
                 MainFrame.Navigate(new UserSettingsPage());
             }
         }
+        private void Domain_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new DomainInfo());
+        }
+
+        private void System_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new ListOfSystems()); 
+        }
     }
 }
