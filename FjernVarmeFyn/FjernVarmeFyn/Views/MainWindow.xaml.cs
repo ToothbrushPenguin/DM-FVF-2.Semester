@@ -26,7 +26,7 @@ namespace FjernVarmeFyn
             MainFrame.Navigate(new UserSendFeedback());
         }
 
-        private void FeedBack_Click(object sender, RoutedEventArgs e)
+        private void RewiewFeedBack_Click(object sender, RoutedEventArgs e)
         {
             if (_selectedButton != null)
                 _selectedButton.Background = Brushes.Black;
@@ -37,11 +37,11 @@ namespace FjernVarmeFyn
             {
                 clickedButton.Background = Brushes.Red;
                 _selectedButton = clickedButton;
-                MainFrame.Navigate(new FeedbackPage());
+                MainFrame.Navigate(new AdminFeedbackReview());
             }
         }
 
-        private void SendtFeedBack_Click(object sender, RoutedEventArgs e)
+        private void FeedBack_Click(object sender, RoutedEventArgs e)
         {
             if (_selectedButton != null)
                 _selectedButton.Background = Brushes.Black;
