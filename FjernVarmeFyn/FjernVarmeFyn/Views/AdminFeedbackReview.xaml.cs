@@ -24,5 +24,7 @@ namespace FjernVarmeFyn.Views
         {
             InitializeComponent();
         }
+
+        
     }
 }

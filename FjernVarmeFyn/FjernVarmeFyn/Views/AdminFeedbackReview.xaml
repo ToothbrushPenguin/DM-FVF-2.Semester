@@ -87,7 +87,7 @@
             <!-- ListView with auto-height rows -->
             <ListView Grid.Row="2" 
                       BorderThickness="1" 
-                      BorderBrush="#CCCCCC">
+                      BorderBrush="#CCCCCC" >
 
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">

@@ -9,158 +9,142 @@
       d:DesignHeight="900" d:DesignWidth="1600"
       Title="ListOfSystems">
 
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-        <Grid.RenderTransform>
-            <ScaleTransform ScaleX="0.9" ScaleY="0.9" />
-        </Grid.RenderTransform>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Content Area -->
+        <Grid Grid.Row="1" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <Grid Width="1600" Height="850" Margin="22,9,-72,-9" Grid.RowSpan="2">
-            <Expander HorizontalAlignment="Left" Height="18" Header="Expander" Margin="270,76,0,0" VerticalAlignment="Top" Width="100">
-                <Grid Background="#FFE5E5E5"/>
-            </Expander>
+            <!-- Filtering and Sorting Options -->
+            <Grid Grid.Row="0" Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
+                <!-- Group Filter -->
+                <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="0,0,15,0">
+                    <TextBlock Text="Gruppe:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ComboBox Width="140" SelectedIndex="0">
+                        <ComboBoxItem Content="Alle"/>
+                        <ComboBoxItem Content="Gruppe 1"/>
+                        <ComboBoxItem Content="Gruppe 2"/>
+                        <ComboBoxItem Content="Gruppe 3"/>
+                    </ComboBox>
+                </StackPanel>
 
-            <!-- Left side with ListBox -->
-            <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,15,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+                <!-- System Filter -->
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="0,0,15,0">
+                    <TextBlock Text="System:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ComboBox Width="140" SelectedIndex="0">
+                        <ComboBoxItem Content="Alle"/>
+                        <ComboBoxItem Content="System 1"/>
+                        <ComboBoxItem Content="System 2"/>
+                        <ComboBoxItem Content="System 3"/>
+                    </ComboBox>
+                </StackPanel>
 
-                <!-- Filtering and Sorting Options -->
-                <Grid Grid.Row="1" Margin="0,0,0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                <!-- Type Filter (Wishes/Feedback) -->
+                <StackPanel Orientation="Horizontal" Grid.Column="2" Margin="0,0,15,0">
+                    <TextBlock Text="Type:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ComboBox Width="140" SelectedIndex="0">
+                        <ComboBoxItem Content="Alle"/>
+                        <ComboBoxItem Content="Ønsker"/>
+                        <ComboBoxItem Content="Feedback"/>
+                    </ComboBox>
+                </StackPanel>
 
-                    <!-- Group Filter -->
-                    <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="0,0,15,0">
-                        <TextBlock Text="Gruppe:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <ComboBox Width="100" SelectedIndex="0">
-                            <ComboBoxItem Content="Alle"/>
-                            <ComboBoxItem Content="Gruppe 1"/>
-                            <ComboBoxItem Content="Gruppe 2"/>
-                            <ComboBoxItem Content="Gruppe 3"/>
-                        </ComboBox>
-                    </StackPanel>
-
-                    <!-- System Filter -->
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="0,0,15,0">
-                        <TextBlock Text="System:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <ComboBox Width="100" SelectedIndex="0">
-                            <ComboBoxItem Content="Alle"/>
-                            <ComboBoxItem Content="System 1"/>
-                            <ComboBoxItem Content="System 2"/>
-                            <ComboBoxItem Content="System 3"/>
-                        </ComboBox>
-                    </StackPanel>
-
-                    <!-- Type Filter (Wishes/Feedback) -->
-                    <StackPanel Orientation="Horizontal" Grid.Column="2" Margin="0,0,15,0">
-                        <TextBlock Text="Type:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <ComboBox Width="100" SelectedIndex="0">
-                            <ComboBoxItem Content="Alle"/>
-                            <ComboBoxItem Content="Ønsker"/>
-                            <ComboBoxItem Content="Feedback"/>
-                        </ComboBox>
-                    </StackPanel>
-
-                    <!-- Status Filter -->
-                    <StackPanel Orientation="Horizontal" Grid.Column="3">
-                        <TextBlock Text="Status:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <ComboBox Width="100" SelectedIndex="0">
-                            <ComboBoxItem Content="Alle"/>
-                            <ComboBoxItem Content="Åben"/>
-                            <ComboBoxItem Content="Lukket"/>
-                            <ComboBoxItem Content="Under behandling"/>
-                        </ComboBox>
-                    </StackPanel>
-                </Grid>
-
-                <!-- ListView with auto-height rows -->
-                <ListView Grid.Row="2" 
-               BorderThickness="1" 
-               BorderBrush="#CCCCCC">
-
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListViewItem}">
-                            <Setter Property="Height" Value="Auto"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-
-                    <ListView.View>
-                        <GridView AllowsColumnReorder="False">
-                            <!-- Emne (Title) column - scales with window size -->
-                            <GridViewColumn Header="System navn" Width="Auto">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Emne}" FontWeight="SemiBold" Margin="0,5" TextWrapping="Wrap" 
-                                            Width="Auto"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <!-- Ticket column - auto-sized to content -->
-                            <GridViewColumn Header="Gruppe" Width="Auto">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Ticket}" Margin="0,5" MinWidth="70"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            
-
-                            <!-- Button 2: Slet -->
-                            <GridViewColumn Header="Feedback knap" Width="Auto">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="Feedback" Padding="5,3" Width="70" Margin="5"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <!-- TextField 2: Admin Priority -->
-                            <GridViewColumn Header="Info knap" Width="Auto">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="Info" Padding="5,3" Width="70" Margin="5"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                        </GridView>
-                    </ListView.View>
-
-                    <!-- Sample items for design-time preview -->
-                    <ListViewItem>
-                        <ListViewItem.Content>
-                            <root:TempFeedbackModel Emne="Problem med login" Ticket="T-1001" System="Login" Status="Åben" AdminPriority="2" Priority="5"/>
-                        </ListViewItem.Content>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <ListViewItem.Content>
-                            <root:TempFeedbackModel Emne="Fejl i rapportmodul" Ticket="T-1002" System="Rapporter" Status="Under behandling" AdminPriority="1" Priority="3"/>
-                        </ListViewItem.Content>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <ListViewItem.Content>
-                            <root:TempFeedbackModel Emne="Forslag til ny funktion" Ticket="T-1003" System="Dashboard" Status="Åben" AdminPriority="3" Priority="4"/>
-                        </ListViewItem.Content>
-                    </ListViewItem>
-                </ListView>
-
-                <!-- Search Bar -->
-                <DockPanel Grid.Row="3" LastChildFill="True" Margin="0,10,0,10">
-                    <TextBlock Text="Søg:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBox VerticalAlignment="Center" Height="24"/>
-                </DockPanel>
+                <!-- Status Filter -->
+                <StackPanel Orientation="Horizontal" Grid.Column="3">
+                    <TextBlock Text="Status:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ComboBox Width="140" SelectedIndex="0">
+                        <ComboBoxItem Content="Alle"/>
+                        <ComboBoxItem Content="Åben"/>
+                        <ComboBoxItem Content="Lukket"/>
+                        <ComboBoxItem Content="Under behandling"/>
+                    </ComboBox>
+                </StackPanel>
             </Grid>
+
+            <!-- ListView - now takes all available space -->
+            <ListView Grid.Row="1" 
+                      BorderThickness="1" 
+                      BorderBrush="#CCCCCC"
+                      Margin="0,0,0,10"
+                      ItemsSource="{Binding SystemItems}">
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="Height" Value="Auto"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <!-- System name column -->
+                        <GridViewColumn Header="System navn" Width="400">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Emne}" FontWeight="SemiBold" Margin="5" TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- Group column -->
+                        <GridViewColumn Header="Gruppe" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Ticket}" Margin="5"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- Feedback button -->
+                        <GridViewColumn Header="Feedback" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Feedback" Padding="5,3" MinWidth="80" Margin="5"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- Info button -->
+                        <GridViewColumn Header="Info" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Info" Padding="5,3" MinWidth="80" Margin="5"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+
+                <!-- Sample items for design-time preview - these will be replaced by proper data binding -->
+                <ListViewItem>
+                    <root:TempFeedbackModel Emne="Problem med login" Ticket="T-1001" System="Login" Status="Åben" AdminPriority="2" Priority="5"/>
+                </ListViewItem>
+                <ListViewItem>
+                    <root:TempFeedbackModel Emne="Fejl i rapportmodul" Ticket="T-1002" System="Rapporter" Status="Under behandling" AdminPriority="1" Priority="3"/>
+                </ListViewItem>
+                <ListViewItem>
+                    <root:TempFeedbackModel Emne="Forslag til ny funktion - meget lang beskrivelse der skal vises korrekt i listen og ikke blive afkortet" Ticket="T-1003" System="Dashboard" Status="Åben" AdminPriority="3" Priority="4"/>
+                </ListViewItem>
+            </ListView>
+
+            <!-- Search Bar -->
+            <DockPanel Grid.Row="2" LastChildFill="True">
+                <TextBlock Text="Søg:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox VerticalAlignment="Center" Height="30"/>
+            </DockPanel>
         </Grid>
     </Grid>
 </Page>
