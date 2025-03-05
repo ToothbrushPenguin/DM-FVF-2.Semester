@@ -43,8 +43,12 @@
 
         <!-- Navigation Bar -->
         <UniformGrid Rows="1" Background="Black" Grid.Row="0">
-            <Button Content="Systemer" Style="{StaticResource NavButtonStyle}" FontSize="12"/>
-            <Button Content="Domæner" Style="{StaticResource NavButtonStyle}" FontSize="14"/>
+            <Button Content="Systemer" Style="{StaticResource NavButtonStyle}" FontSize="12"
+                    Click="System_Click" />
+            <Button Content="Domæner"
+                    Style="{StaticResource NavButtonStyle}"
+                    FontSize="14"
+                    Click="Domain_Click" /> 
             <Button Content="Feedback" Style="{StaticResource NavButtonStyle}" FontSize="14" Click="FeedBack_Click"/>
             <Button Content="Sendt feedback" Style="{StaticResource NavButtonStyle}" FontSize="12" Click="SendtFeedBack_Click"/>
             <Button Content="Statistik" Style="{StaticResource NavButtonStyle}" FontSize="14"/>
