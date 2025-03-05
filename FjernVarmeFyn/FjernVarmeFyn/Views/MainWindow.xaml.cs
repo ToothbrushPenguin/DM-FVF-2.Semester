@@ -17,6 +17,8 @@ namespace FjernVarmeFyn
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Button _selectedButton = null;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -26,17 +28,47 @@ namespace FjernVarmeFyn
 
         private void FeedBack_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new FeedbackPage());
+            if (_selectedButton != null)
+                _selectedButton.Background = Brushes.Black;
+
+            // Set new button color
+            Button clickedButton = sender as Button;
+            if (clickedButton != null)
+            {
+                clickedButton.Background = Brushes.Red;
+                _selectedButton = clickedButton;
+                MainFrame.Navigate(new FeedbackPage());
+            }
         }
 
         private void SendtFeedBack_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new UserSendFeedback());
+            if (_selectedButton != null)
+                _selectedButton.Background = Brushes.Black;
+
+            // Set new button color
+            Button clickedButton = sender as Button;
+            if (clickedButton != null)
+            {
+                clickedButton.Background = Brushes.Red;
+                _selectedButton = clickedButton;
+                MainFrame.Navigate(new UserSendFeedback());
+            }
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new UserSettingsPage());
+            if (_selectedButton != null)
+                _selectedButton.Background = Brushes.Black;
+
+            // Set new button color
+            Button clickedButton = sender as Button;
+            if (clickedButton != null)
+            {
+                clickedButton.Background = Brushes.Red;
+                _selectedButton = clickedButton;
+                MainFrame.Navigate(new UserSettingsPage());
+            }
         }
     }
 }
