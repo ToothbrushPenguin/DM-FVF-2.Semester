@@ -1,0 +1,258 @@
+﻿<Page x:Class="FjernVarmeFyn.Views.AdminFeedbackReview"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FjernVarmeFyn.Views"
+      xmlns:root="clr-namespace:FjernVarmeFyn"
+      mc:Ignorable="d" 
+      d:DesignHeight="1000" d:DesignWidth="2000"
+      Title="AdminFeedbackReview">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <!-- Left side for the existing content -->
+            <ColumnDefinition Width="3*"/>
+            <!-- Right side for new content -->
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left side with ListBox -->
+        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,15,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Filtering and Sorting Options -->
+            <Grid Grid.Row="1" Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Group Filter -->
+                <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="0,0,15,0">
+                    <TextBlock Text="Gruppe:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ComboBox Width="100" SelectedIndex="0">
+                        <ComboBoxItem Content="Alle"/>
+                        <ComboBoxItem Content="Gruppe 1"/>
+                        <ComboBoxItem Content="Gruppe 2"/>
+                        <ComboBoxItem Content="Gruppe 3"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- System Filter -->
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="0,0,15,0">
+                    <TextBlock Text="System:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ComboBox Width="100" SelectedIndex="0">
+                        <ComboBoxItem Content="Alle"/>
+                        <ComboBoxItem Content="System 1"/>
+                        <ComboBoxItem Content="System 2"/>
+                        <ComboBoxItem Content="System 3"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- Type Filter (Wishes/Feedback) -->
+                <StackPanel Orientation="Horizontal" Grid.Column="2" Margin="0,0,15,0">
+                    <TextBlock Text="Type:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ComboBox Width="100" SelectedIndex="0">
+                        <ComboBoxItem Content="Alle"/>
+                        <ComboBoxItem Content="Ønsker"/>
+                        <ComboBoxItem Content="Feedback"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- Status Filter -->
+                <StackPanel Orientation="Horizontal" Grid.Column="3">
+                    <TextBlock Text="Status:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ComboBox Width="100" SelectedIndex="0">
+                        <ComboBoxItem Content="Alle"/>
+                        <ComboBoxItem Content="Åben"/>
+                        <ComboBoxItem Content="Lukket"/>
+                        <ComboBoxItem Content="Under behandling"/>
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+
+            <!-- ListView with auto-height rows -->
+            <ListView Grid.Row="2" 
+                      BorderThickness="1" 
+                      BorderBrush="#CCCCCC" >
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="Height" Value="Auto"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <!-- Emne (Title) column - scales with window size -->
+                        <GridViewColumn Header="Emne" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Emne}" FontWeight="SemiBold" Margin="0,5" TextWrapping="Wrap" 
+                                                   Width="Auto"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- Ticket column - auto-sized to content -->
+                        <GridViewColumn Header="Ticket" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Ticket}" Margin="0,5" MinWidth="70"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- System column - auto-sized to content -->
+                        <GridViewColumn Header="System" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding System}" Margin="0,5" MinWidth="80"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- Status column - auto-sized to content -->
+                        <GridViewColumn Header="Status" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Status}" Margin="0,5" MinWidth="100"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- Button 2: Slet -->
+                        <GridViewColumn Header="Handling" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Slet" Padding="5,3" Width="70" Margin="5"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- TextField 2: Admin Priority -->
+                        <GridViewColumn Header="Admin Priority" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding AdminPriority, Mode=TwoWay}" Width="80" Margin="5"  HorizontalContentAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- TextField 1: User Priority -->
+                        <GridViewColumn Header="Priority" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Priority, Mode=TwoWay}" Width="80" Margin="5" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+
+                <!-- Sample items for design-time preview -->
+                <ListViewItem>
+                    <ListViewItem.Content>
+                        <root:TempFeedbackModel Emne="Problem med login" Ticket="T-1001" System="Login" Status="Åben" AdminPriority="2" Priority="5"/>
+                    </ListViewItem.Content>
+                </ListViewItem>
+                <ListViewItem>
+                    <ListViewItem.Content>
+                        <root:TempFeedbackModel Emne="Fejl i rapportmodul" Ticket="T-1002" System="Rapporter" Status="Under behandling" AdminPriority="1" Priority="3"/>
+                    </ListViewItem.Content>
+                </ListViewItem>
+                <ListViewItem>
+                    <ListViewItem.Content>
+                        <root:TempFeedbackModel Emne="Forslag til ny funktion" Ticket="T-1003" System="Dashboard" Status="Åben" AdminPriority="3" Priority="4"/>
+                    </ListViewItem.Content>
+                </ListViewItem>
+            </ListView>
+
+            <!-- Search Bar -->
+            <DockPanel Grid.Row="3" LastChildFill="True" Margin="0,10,0,10">
+                <TextBlock Text="Søg:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox VerticalAlignment="Center" Height="24"/>
+            </DockPanel>
+        </Grid>
+
+        <!-- Right side area for additional content -->
+        <Grid Grid.Row="1" Grid.Column="1" Margin="15,0,0,0">
+            <!-- Details content -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Emne Section - Spans both columns -->
+                    <GroupBox Header="Emne" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
+                        <TextBlock Text="{Binding Emne}" TextWrapping="Wrap" Margin="5"/>
+                    </GroupBox>
+
+                    <!-- System Section - Now before Ticket and spans both columns -->
+                    <GroupBox Header="System" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
+                        <TextBlock Text="{Binding System}" Margin="5"/>
+                    </GroupBox>
+
+                    <!-- Ticket Section - Moved to row 2 -->
+                    <GroupBox Header="Ticket" Grid.Row="2" Grid.Column="0" Margin="5">
+                        <TextBlock Text="{Binding Ticket}" Margin="5"/>
+                    </GroupBox>
+
+                    <!-- Status Section - Moved to row 2 -->
+                    <GroupBox Header="Status" Grid.Row="2" Grid.Column="1" Margin="5">
+                        <TextBlock Text="{Binding Status}" Margin="5"/>
+                    </GroupBox>
+
+                    <!-- Priority Sections - Now separated -->
+                    <!-- User Priority Section - Moved down one row -->
+                    <GroupBox Header="Priority" Grid.Row="3" Grid.Column="1" Margin="5,5,5,2.5">
+                        <TextBlock Text="{Binding Priority}" Margin="5"/>
+                    </GroupBox>
+
+                    <!-- Admin Priority Section -->
+                    <GroupBox Header="Admin Priority" Grid.Row="3" Grid.Column="0" Margin="5,2.5,5,5">
+                        <TextBlock Text="{Binding AdminPriority}" Margin="5"/>
+                    </GroupBox>
+
+                    <!-- Description Section - Below everything else -->
+                    <GroupBox Header="Beskrivelse" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
+                        <TextBox Text="{Binding Description}" 
+                                TextWrapping="Wrap" 
+                                AcceptsReturn="True"
+                                IsReadOnly="True"
+                                VerticalScrollBarVisibility="Auto"
+                                MinHeight="200"
+                                Margin="5"
+                                Padding="5"
+                                BorderThickness="0"/>
+                    </GroupBox>
+
+                    <Button Content="Indsend" Width="80" Padding="5,3" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>
