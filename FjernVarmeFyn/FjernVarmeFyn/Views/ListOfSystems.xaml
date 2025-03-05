@@ -114,14 +114,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <!-- Status column - auto-sized to content -->
-                            <GridViewColumn Header="Status" Width="Auto">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Status}" Margin="0,5" MinWidth="100"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                            
 
                             <!-- Button 2: Slet -->
                             <GridViewColumn Header="Feedback knap" Width="Auto">
