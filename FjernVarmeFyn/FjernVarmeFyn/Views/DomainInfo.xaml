@@ -5,18 +5,48 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FjernVarmeFyn.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="900" d:DesignWidth="1600"
       Title="DomainInfo">
 
-    <Grid>
-        <Button Content="System" HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="45"/>
-        <Button Content="Statistik" HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="45" Margin="45,0,0,0"/>
-        <Button Content="Indstillinger" HorizontalAlignment="Left" Margin="709,0,0,0" VerticalAlignment="Top" Height="45" Width="45"/>
-        <Button Content="Tilbage" HorizontalAlignment="Left" Margin="28,398,0,0" VerticalAlignment="Top" Width="80" Height="26"/>
-        <TextBox HorizontalAlignment="Center" Margin="0,70,0,0" TextWrapping="Wrap" Text="System Name" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Center" Margin="0,120,0,0" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top" Width="250" Height="148"/>
-        <TextBox HorizontalAlignment="Center" Margin="0,289,0,0" TextWrapping="Wrap" Text="Contact Info" VerticalAlignment="Top" Width="250" Height="60"/>
-        <TextBox HorizontalAlignment="Center" Margin="0,380,0,0" TextWrapping="Wrap" Text="License" VerticalAlignment="Top" Width="120"/>
+    <Page.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
 
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform>
+            <ScaleTransform ScaleX="0.9" ScaleY="0.9" />
+        </Grid.RenderTransform>
+
+
+        <Grid Width="1600" Height="850" Margin="22,9,-72,-9" Grid.RowSpan="2">
+            <Button Content="Tilbage" HorizontalAlignment="Left" Margin="10,814,0,0" VerticalAlignment="Top" Width="80" Height="26" Style="{StaticResource CustomButtonStyle}"/>
+            <TextBox HorizontalAlignment="Left" Margin="676,70,0,0" TextWrapping="Wrap" Text="System Name" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Left" Margin="621,120,0,0" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top" Width="250" Height="148"/>
+            <TextBox HorizontalAlignment="Left" Margin="621,289,0,0" TextWrapping="Wrap" Text="Contact Info" VerticalAlignment="Top" Width="250" Height="60"/>
+            <TextBox HorizontalAlignment="Left" Margin="680,380,0,0" TextWrapping="Wrap" Text="License" VerticalAlignment="Top" Width="120"/>
+
+        </Grid>
     </Grid>
 </Page>
