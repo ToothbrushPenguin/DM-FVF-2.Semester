@@ -91,10 +91,8 @@ namespace FjernVarmeFyn.ViewModels
 
         private void AddFeedback()
         {
-            // Check if no item is selected in the ListView
             if (SelectedFeedback == null)
             {
-                // Create a new feedback using CurrentFeedback values
                 Feedback feedback = new Feedback(
                     CurrentFeedback.FeedbackSubject,
                     CurrentFeedback.Description,
@@ -106,13 +104,10 @@ namespace FjernVarmeFyn.ViewModels
 
                 try
                 {
-                    // Add the feedback to the repository
                     _feedbackRepository.Create(feedback);
 
-                    // Refresh the FeedbackList to show the new item
                     FeedbackList = new ObservableCollection<Feedback>(_feedbackRepository.GetAll());
 
-                    // Clear the form to prepare for new feedback entry
                     CurrentFeedback = new Feedback();
 
                     MessageBox.Show("Feedback sent successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -129,7 +124,6 @@ namespace FjernVarmeFyn.ViewModels
         {
             if (SelectedFeedback != null)
             {
-                // Update only the editable fields in the SelectedFeedback object
                 SelectedFeedback.FeedbackSubject = CurrentFeedback.FeedbackSubject;
                 SelectedFeedback.Description = CurrentFeedback.Description;
                 SelectedFeedback.System = CurrentFeedback.System;
@@ -137,10 +131,8 @@ namespace FjernVarmeFyn.ViewModels
                 SelectedFeedback.Status = CurrentFeedback.Status;
                 SelectedFeedback.Type = CurrentFeedback.Type;
 
-                // Call the repository to persist the changes in the database
-                _feedbackRepository.Update(SelectedFeedback); // Assuming this method exist
+                _feedbackRepository.Update(SelectedFeedback); 
 
-                // Notify the UI to update the list
                 OnPropertyChanged(nameof(FeedbackList));
             }
         }
