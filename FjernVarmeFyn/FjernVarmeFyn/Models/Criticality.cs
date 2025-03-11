@@ -8,10 +8,10 @@ namespace FjernVarmeFyn.Models
 {   
     public enum Criticality
     {
-        VeryLow = 1,
-        Low = 2,
+        MegetLav = 1,
+        Lav = 2,
         Medium = 3,
-        High = 4,
-        VeryHigh = 5
+        Høj = 4,
+        MegetHøj = 5
     }
 }

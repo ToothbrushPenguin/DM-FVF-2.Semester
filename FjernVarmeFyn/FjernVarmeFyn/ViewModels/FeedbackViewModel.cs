@@ -24,7 +24,11 @@ namespace FjernVarmeFyn.ViewModels
         private readonly IRepository<Feedback> _feedbackRepository;
         public IRelayCommand SubmitFeedbackCommand { get; }
         public IRelayCommand UpdateFeedbackCommand { get; }
+        public IRelayCommand DeleteFeedbackCommand { get; }
         private ObservableCollection<Feedback> _feedbackList = new ObservableCollection<Feedback>();
+        public List<FeedbackStatus> FeedbackStatusList { get; } = Enum.GetValues(typeof(FeedbackStatus)).Cast<FeedbackStatus>().ToList();
+        public List<Criticality> FeedbackCriticalityList { get; } = Enum.GetValues(typeof(Criticality)).Cast<Criticality>().ToList();
+        public List<FeedbackType> FeedbackTypeList { get; } = Enum.GetValues(typeof(FeedbackType)).Cast<FeedbackType>().ToList();
 
         public ObservableCollection<Feedback> FeedbackList
         {
@@ -86,6 +90,7 @@ namespace FjernVarmeFyn.ViewModels
             _feedbackRepository = feedbackRepository;
             UpdateFeedbackCommand = new RelayCommand(UpdateFeedback);
             SubmitFeedbackCommand = new RelayCommand(AddFeedback);
+            DeleteFeedbackCommand = new RelayCommand<Feedback>(DeleteFeedback);
             FeedbackList = new ObservableCollection<Feedback>(_feedbackRepository.GetAll());
         }
 
@@ -137,6 +142,28 @@ namespace FjernVarmeFyn.ViewModels
             }
         }
 
+        private void DeleteFeedback(Feedback feedback)
+        {
+            if (feedback == null)
+                return;
+
+            var result = MessageBox.Show("Er du sikker du vil slette dette feedback?",
+                                         "Confirm slet", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _feedbackRepository.Delete(feedback);
+                    FeedbackList.Remove(feedback);
+                    MessageBox.Show("Feedback slettet successfuld.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show($"Error ved sletning af feedback: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

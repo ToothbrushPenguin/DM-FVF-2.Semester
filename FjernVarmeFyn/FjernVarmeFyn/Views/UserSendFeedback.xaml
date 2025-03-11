@@ -141,9 +141,11 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Content="Slet" 
-                                Padding="5,3" 
-                                Width="70" 
-                                Margin="5"/>
+                                            Padding="5,3" 
+                                            Width="70" 
+                                            Margin="5"
+                                            Command="{Binding DataContext.DeleteFeedbackCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                            CommandParameter="{Binding}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -202,16 +204,22 @@
 
                     <!-- Status Section -->
                     <GroupBox Header="Status" Grid.Row="2" Grid.Column="1" Margin="5">
-                        <TextBox Text="{Binding CurrentFeedback.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                        <ComboBox ItemsSource="{Binding FeedbackStatusList}" 
+              SelectedItem="{Binding CurrentFeedback.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              Margin="5" />
                     </GroupBox>
 
                     <!-- User Priority Section -->
-                    <GroupBox Header="Priority" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" Margin="5,5,5,2.5">
-                        <TextBox Text="{Binding CurrentFeedback.Criticality, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                    <GroupBox Header="Prioritet" Grid.Row="3" Grid.Column="0" Margin="5">
+                        <ComboBox ItemsSource="{Binding FeedbackCriticalityList}" 
+                    SelectedItem="{Binding CurrentFeedback.Criticality, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5" />
                     </GroupBox>
 
-                    <GroupBox Header="Type" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" Margin="5,5,5,2.5">
-                        <TextBox Text="{Binding CurrentFeedback.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                    <GroupBox Header="Type" Grid.Row="3" Grid.Column="1" Margin="5">
+                        <ComboBox ItemsSource="{Binding FeedbackTypeList}" 
+                    SelectedItem="{Binding CurrentFeedback.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5" />
                     </GroupBox>
 
                     <!-- Description Section  -->
