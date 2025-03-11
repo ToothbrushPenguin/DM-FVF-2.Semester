@@ -46,14 +46,23 @@
             <TextBox HorizontalAlignment="Left" Margin="697,155,0,0" TextWrapping="Wrap" Text="Navn" VerticalAlignment="Top" Width="124" />
             <TextBox HorizontalAlignment="Left" Margin="697,185,0,0" TextWrapping="Wrap" Text="E-Mail" VerticalAlignment="Top" Width="124" />
             <TextBox HorizontalAlignment="Left" Margin="697,213,0,0" TextWrapping="Wrap" Text="Telefon nummber" VerticalAlignment="Top" Width="124" />
-            <TextBox HorizontalAlignment="Left" Margin="692,363,0,0" TextWrapping="Wrap" Text="Feedback emne" VerticalAlignment="Top" Width="124" />
-            <TextBox HorizontalAlignment="Left" Margin="530,386,0,0" TextWrapping="Wrap" Text="Beskrivelse" VerticalAlignment="Top" Width="453" Height="245"/>
+            <TextBox HorizontalAlignment="Left" Margin="692,344,0,0" TextWrapping="Wrap" Text="{Binding FeedbackSubject}" VerticalAlignment="Top" Width="124" />
+            <TextBox HorizontalAlignment="Left" Margin="530,386,0,0" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="453" Height="245"/>
 
             <Button Content="Upload Fil" HorizontalAlignment="Left" Margin="529,647,0,0" VerticalAlignment="Top" Width="60" Style="{StaticResource CustomButtonStyle}"/>
             <Button Content="Tilbage" HorizontalAlignment="Left" Margin="0,821,0,0" VerticalAlignment="Top" Style="{StaticResource CustomButtonStyle}" Height="29" Width="97"/>
-            <Button Content="Indsend" HorizontalAlignment="Left" Margin="932,645,0,0" VerticalAlignment="Top" Style="{StaticResource CustomButtonStyle}" RenderTransformOrigin="1.159,-0.244" Height="19" Width="51"/>
+            <Button Content="Indsend"
+                    Command="{Binding SubmitFeedbackCommand}"
+                    HorizontalAlignment="Left" 
+                    Margin="932,645,0,0" 
+                    VerticalAlignment="Top" 
+                    Style="{StaticResource CustomButtonStyle}" 
+                    RenderTransformOrigin="1.159,-0.244" 
+                    Height="19" Width="51"/>
             <ComboBox HorizontalAlignment="Left" Margin="800,644,0,0" VerticalAlignment="Top" Width="120" Text="Type af feedback" />
-            <ComboBox HorizontalAlignment="Left" Margin="697,92,0,0" VerticalAlignment="Top" Width="122"/>
+            <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding CriticalityList}" SelectedItem="{Binding SelectedCriticality}" Margin="697,92,0,0" VerticalAlignment="Top" Width="122"/>
+            <Label Content="Feedback emne:" HorizontalAlignment="Left" Margin="689,320,0,0" VerticalAlignment="Top"/>
+            <Label Content="Feedback Beskrivelse:" HorizontalAlignment="Left" Margin="529,360,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 </Page>

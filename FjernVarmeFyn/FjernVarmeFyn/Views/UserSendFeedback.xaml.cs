@@ -14,6 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using System.Collections.ObjectModel;
+using FjernVarmeFyn.Models;
+using FjernVarmeFyn.Repositories;
+using FjernVarmeFyn.ViewModels;
 
 namespace FjernVarmeFyn.Views
 {
@@ -61,8 +64,8 @@ namespace FjernVarmeFyn.Views
                 }
             };
 
-            // Set the DataContext to this page instance
-            this.DataContext = this;
+            IRepository<Feedback> feedbackRepository = new FeedbackRepository("Server=localhost\\SQLEXPRESS;Database=feedbacktest;Trusted_Connection=True;TrustServerCertificate=true");
+            this.DataContext = new FeedbackViewModel(feedbackRepository);
         }
 
 
