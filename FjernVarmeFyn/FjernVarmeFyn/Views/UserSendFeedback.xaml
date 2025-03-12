@@ -8,6 +8,31 @@
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="2000"
       Title="UserSendFeedback">
+    <Page.Resources>
+        <!-- Common style for all navigation buttons -->
+        <Style x:Key="NavButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -141,6 +166,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Content="Slet" 
+                                            Style="{StaticResource NavButtonStyle}"
                                             Padding="5,3" 
                                             Width="70" 
                                             Margin="5"
@@ -236,6 +262,7 @@
 
                     <Button Content="Indsend" 
                             Command="{Binding SubmitFeedbackCommand}"
+                            Style="{StaticResource NavButtonStyle}"
                             Width="80" 
                             Padding="5,3" 
                             Grid.Row="5" 
@@ -244,6 +271,7 @@
 
                     <Button Content="Opdater" 
                             Command="{Binding UpdateFeedbackCommand}"
+                            Style="{StaticResource NavButtonStyle}"
                             Width="80" 
                             Padding="5,3" 
                             Grid.Row="5" 
@@ -251,7 +279,8 @@
                             Grid.ColumnSpan="2"/>
 
                     <Button Content="Nyt feedback" 
-                            Click="FeedBack_Click" 
+                            Click="FeedBack_Click"
+                            Style="{StaticResource NavButtonStyle}"
                             Padding="5,3" 
                             Grid.Row="5" 
                             Grid.Column="0" 

@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FjernVarmeFyn.ViewModels;
 using FjernVarmeFyn.Models;
-using FjernVarmeFyn.Repositories;
+using FjernVarmeFyn.Persistance;
 
 namespace FjernVarmeFyn.Views
 {

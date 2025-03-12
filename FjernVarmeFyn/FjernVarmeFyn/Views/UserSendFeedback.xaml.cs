@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 using System.Collections.ObjectModel;
 using FjernVarmeFyn.Models;
-using FjernVarmeFyn.Repositories;
+using FjernVarmeFyn.Persistance;
 using FjernVarmeFyn.ViewModels;
 
 namespace FjernVarmeFyn.Views
