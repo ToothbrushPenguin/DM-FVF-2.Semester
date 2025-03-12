@@ -35,9 +35,9 @@ namespace FjernVarmeFyn.Models
                     "VALUES(@UserName,@Password,@AccessLevel)" +
                     "SELECT @@IDENTITY", con))
                 {
-                    cmd.Parameters.Add("@UserName", SqlDbType.NVarChar).Value = newUser.UserName; 
+                    cmd.Parameters.Add("@UserName", SqlDbType.NVarChar).Value = newUser.Email; 
                     cmd.Parameters.Add("@Password", SqlDbType.NVarChar).Value = newUser.Password; 
-                    cmd.Parameters.Add("@AccessLevel", SqlDbType.Int).Value = newUser.AccessLevel; 
+                    cmd.Parameters.Add("@AccessLevel", SqlDbType.Int).Value = newUser.Group; 
 
                     newUser.UserID = Convert.ToInt32(cmd.ExecuteScalar()); 
                     users.Add(newUser);
@@ -60,9 +60,9 @@ namespace FjernVarmeFyn.Models
                         readUser = new User();
 
                         readUser.UserID = dr.GetInt32(0);
-                        readUser.UserName = dr.GetString(1);
+                        readUser.Email = dr.GetString(1);
                         readUser.Password = dr.GetString(2);
-                        readUser.AccessLevel = dr.GetString(3);
+                        readUser.Group = dr.GetString(3);
                     }
                 }
             }
@@ -82,9 +82,9 @@ namespace FjernVarmeFyn.Models
                         User getUsers = new User();
                         {
                             getUsers.UserID = dr.GetInt32(0);
-                            getUsers.UserName = dr.GetString(1);
+                            getUsers.Email = dr.GetString(1);
                             getUsers.Password = dr.GetString(2);
-                            getUsers.AccessLevel = dr.GetString(3);
+                            getUsers.Group = dr.GetString(3);
                         };
                         users.Add(getUsers);
                     }
