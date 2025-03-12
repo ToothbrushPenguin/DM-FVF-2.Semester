@@ -29,11 +29,11 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
-                
+
             </Grid.RowDefinitions>
 
 
-            
+
 
             <!-- Filtering and Sorting Options -->
             <Grid Grid.Row="1" Margin="0,0,0,10">
@@ -172,7 +172,7 @@
         <!-- Right side area for additional content -->
         <Grid Grid.Row="1" Grid.Column="1" Margin="15,0,0,0">
             <!-- Details content -->
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Disabled">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -229,9 +229,9 @@
                          AcceptsReturn="True"
                          VerticalScrollBarVisibility="Auto"
                          MinHeight="200"
-                         Margin="5"
+                         Margin="5,0,5,0"
                          Padding="5"
-                         BorderThickness="0"/>
+                         BorderThickness="0" Height="623"/>
                     </GroupBox>
 
                     <Button Content="Indsend" 
@@ -249,6 +249,14 @@
                             Grid.Row="5" 
                             Grid.Column="0" 
                             Grid.ColumnSpan="2"/>
+
+                    <Button Content="Nyt feedback" 
+                            Click="FeedBack_Click" 
+                            Padding="5,3" 
+                            Grid.Row="5" 
+                            Grid.Column="0" 
+                            VerticalAlignment="Center"
+                            Margin="150,0,118,0" Height="34"/>
                 </Grid>
             </ScrollViewer>
         </Grid>
