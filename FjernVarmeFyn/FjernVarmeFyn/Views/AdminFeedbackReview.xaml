@@ -9,6 +9,32 @@
       d:DesignHeight="1000" d:DesignWidth="2000"
       Title="AdminFeedbackReview">
 
+    <Page.Resources>
+        <!-- Common style for all navigation buttons -->
+        <Style x:Key="NavButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -29,7 +55,11 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+
             </Grid.RowDefinitions>
+
+
+
 
             <!-- Filtering and Sorting Options -->
             <Grid Grid.Row="1" Margin="0,0,0,10">
@@ -86,101 +116,79 @@
 
             <!-- ListView with auto-height rows -->
             <ListView Grid.Row="2" 
-                      BorderThickness="1" 
-                      BorderBrush="#CCCCCC" >
-
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="Height" Value="Auto"/>
-                    </Style>
-                </ListView.ItemContainerStyle>
-
+      BorderThickness="1" 
+      BorderBrush="#CCCCCC"
+      ItemsSource="{Binding FeedbackList}"
+      SelectedItem="{Binding SelectedFeedback, Mode=TwoWay}">
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
-                        <!-- Emne (Title) column - scales with window size -->
                         <GridViewColumn Header="Emne" Width="Auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Emne}" FontWeight="SemiBold" Margin="0,5" TextWrapping="Wrap" 
-                                                   Width="Auto"/>
+                                    <TextBlock Text="{Binding FeedbackSubject}" 
+                               FontWeight="SemiBold" 
+                               Margin="0,5" 
+                               TextWrapping="Wrap" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <!-- Ticket column - auto-sized to content -->
                         <GridViewColumn Header="Ticket" Width="Auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Ticket}" Margin="0,5" MinWidth="70"/>
+                                    <TextBlock Text="{Binding FeedbackID}" 
+                               Margin="0,5" 
+                               MinWidth="70"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <!-- System column - auto-sized to content -->
                         <GridViewColumn Header="System" Width="Auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding System}" Margin="0,5" MinWidth="80"/>
+                                    <TextBlock Text="{Binding System}" 
+                               Margin="0,5" 
+                               MinWidth="80"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <!-- Status column - auto-sized to content -->
                         <GridViewColumn Header="Status" Width="Auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Status}" Margin="0,5" MinWidth="100"/>
+                                    <TextBlock Text="{Binding Status}" 
+                               Margin="0,5" 
+                               MinWidth="100"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <!-- Button 2: Slet -->
                         <GridViewColumn Header="Handling" Width="Auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Slet" Padding="5,3" Width="70" Margin="5"/>
+                                    <Button Content="Slet" 
+                                        Style="{StaticResource NavButtonStyle}"
+                                        Padding="5,3" 
+                                        Width="70" 
+                                        Margin="5"
+                                        Command="{Binding DataContext.DeleteFeedbackCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                        CommandParameter="{Binding}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <!-- TextField 2: Admin Priority -->
-                        <GridViewColumn Header="Admin Priority" Width="Auto">
+                        <GridViewColumn Header="Prioritet" Width="Auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding AdminPriority, Mode=TwoWay}" Width="80" Margin="5"  HorizontalContentAlignment="Center"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-
-                        <!-- TextField 1: User Priority -->
-                        <GridViewColumn Header="Priority" Width="Auto">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBox Text="{Binding Priority, Mode=TwoWay}" Width="80" Margin="5" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                                    <TextBlock Text="{Binding Criticality}" 
+                             Width="80" 
+                             Margin="5" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
-
-                <!-- Sample items for design-time preview -->
-                <ListViewItem>
-                    <ListViewItem.Content>
-                        <root:TempFeedbackModel Emne="Problem med login" Ticket="T-1001" System="Login" Status="Åben" AdminPriority="2" Priority="5"/>
-                    </ListViewItem.Content>
-                </ListViewItem>
-                <ListViewItem>
-                    <ListViewItem.Content>
-                        <root:TempFeedbackModel Emne="Fejl i rapportmodul" Ticket="T-1002" System="Rapporter" Status="Under behandling" AdminPriority="1" Priority="3"/>
-                    </ListViewItem.Content>
-                </ListViewItem>
-                <ListViewItem>
-                    <ListViewItem.Content>
-                        <root:TempFeedbackModel Emne="Forslag til ny funktion" Ticket="T-1003" System="Dashboard" Status="Åben" AdminPriority="3" Priority="4"/>
-                    </ListViewItem.Content>
-                </ListViewItem>
             </ListView>
-
             <!-- Search Bar -->
             <DockPanel Grid.Row="3" LastChildFill="True" Margin="0,10,0,10">
                 <TextBlock Text="Søg:" VerticalAlignment="Center" Margin="0,0,10,0"/>
@@ -191,7 +199,7 @@
         <!-- Right side area for additional content -->
         <Grid Grid.Row="1" Grid.Column="1" Margin="15,0,0,0">
             <!-- Details content -->
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Disabled">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -206,51 +214,79 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Emne Section - Spans both columns -->
+                    <!-- Emne Section  -->
                     <GroupBox Header="Emne" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
-                        <TextBlock Text="{Binding Emne}" TextWrapping="Wrap" Margin="5"/>
+                        <TextBox Text="{Binding CurrentFeedback.FeedbackSubject}" TextWrapping="Wrap" Margin="5"/>
                     </GroupBox>
 
-                    <!-- System Section - Now before Ticket and spans both columns -->
+                    <!-- System Section -->
                     <GroupBox Header="System" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
-                        <TextBlock Text="{Binding System}" Margin="5"/>
+                        <TextBox Text="{Binding CurrentFeedback.System, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
                     </GroupBox>
 
-                    <!-- Ticket Section - Moved to row 2 -->
+                    <!-- Ticket Section -->
                     <GroupBox Header="Ticket" Grid.Row="2" Grid.Column="0" Margin="5">
-                        <TextBlock Text="{Binding Ticket}" Margin="5"/>
+                        <TextBox Text="{Binding CurrentFeedback.FeedbackID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
                     </GroupBox>
 
-                    <!-- Status Section - Moved to row 2 -->
+                    <!-- Status Section -->
                     <GroupBox Header="Status" Grid.Row="2" Grid.Column="1" Margin="5">
-                        <TextBlock Text="{Binding Status}" Margin="5"/>
+                        <ComboBox ItemsSource="{Binding FeedbackStatusList}" 
+          SelectedItem="{Binding CurrentFeedback.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          Margin="5" />
                     </GroupBox>
 
-                    <!-- Priority Sections - Now separated -->
-                    <!-- User Priority Section - Moved down one row -->
-                    <GroupBox Header="Priority" Grid.Row="3" Grid.Column="1" Margin="5,5,5,2.5">
-                        <TextBlock Text="{Binding Priority}" Margin="5"/>
+                    <!-- User Priority Section -->
+                    <GroupBox Header="Prioritet" Grid.Row="3" Grid.Column="0" Margin="5">
+                        <ComboBox ItemsSource="{Binding FeedbackCriticalityList}" 
+                SelectedItem="{Binding CurrentFeedback.Criticality, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Margin="5" />
                     </GroupBox>
 
-                    <!-- Admin Priority Section -->
-                    <GroupBox Header="Admin Priority" Grid.Row="3" Grid.Column="0" Margin="5,2.5,5,5">
-                        <TextBlock Text="{Binding AdminPriority}" Margin="5"/>
+                    <GroupBox Header="Type" Grid.Row="3" Grid.Column="1" Margin="5">
+                        <ComboBox ItemsSource="{Binding FeedbackTypeList}" 
+                SelectedItem="{Binding CurrentFeedback.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Margin="5" />
                     </GroupBox>
 
-                    <!-- Description Section - Below everything else -->
+                    <!-- Description Section  -->
                     <GroupBox Header="Beskrivelse" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
-                        <TextBox Text="{Binding Description}" 
-                                TextWrapping="Wrap" 
-                                AcceptsReturn="True"
-                                IsReadOnly="True"
-                                VerticalScrollBarVisibility="Auto"
-                                MinHeight="200"
-                                Margin="5"
-                                Padding="5"
-                                BorderThickness="0"/>
+                        <TextBox Text="{Binding CurrentFeedback.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     TextWrapping="Wrap" 
+                     AcceptsReturn="True"
+                     VerticalScrollBarVisibility="Auto"
+                     MinHeight="200"
+                     Margin="5,0,5,0"
+                     Padding="5"
+                     BorderThickness="0" Height="623"/>
                     </GroupBox>
 
-                    <Button Content="Indsend" Width="80" Padding="5,3" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
+                    <Button Content="Indsend" 
+                        Command="{Binding SubmitFeedbackCommand}"
+                        Style="{StaticResource NavButtonStyle}"
+                        Width="80" 
+                        Padding="5,3" 
+                        Grid.Row="5" 
+                        Grid.Column="3" 
+                        Grid.ColumnSpan="2"/>
+
+                    <Button Content="Opdater" 
+                        Command="{Binding UpdateFeedbackCommand}"
+                        Style="{StaticResource NavButtonStyle}"
+                        Width="80" 
+                        Padding="5,3" 
+                        Grid.Row="5" 
+                        Grid.Column="0" 
+                        Grid.ColumnSpan="2"/>
+
+                    <Button Content="Nyt feedback" 
+                        Click="FeedBack_Click"
+                        Style="{StaticResource NavButtonStyle}"
+                        Padding="5,3" 
+                        Grid.Row="5" 
+                        Grid.Column="0" 
+                        VerticalAlignment="Center"
+                        Margin="150,0,118,0" Height="34"/>
                 </Grid>
             </ScrollViewer>
         </Grid>
