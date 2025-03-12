@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FjernVarmeFyn.Repositories
+namespace FjernVarmeFyn.Persistance
 {
     public interface IRepository<T> : IDisposable where T : class
     {

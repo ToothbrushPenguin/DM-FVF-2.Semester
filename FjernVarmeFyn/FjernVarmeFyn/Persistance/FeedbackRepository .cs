@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using FjernVarmeFyn.Models;
 using Microsoft.Data.SqlClient;
 
-namespace FjernVarmeFyn.Repositories
+namespace FjernVarmeFyn.Persistance
 {
     class FeedbackRepository : IRepository<Feedback>
     {
