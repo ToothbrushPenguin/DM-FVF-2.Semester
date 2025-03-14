@@ -19,7 +19,7 @@ using Microsoft.Data.SqlClient;
 
 namespace FjernVarmeFyn.ViewModels
 {
-    class FeedbackViewModel : INotifyPropertyChanged
+    public class FeedbackViewModel : INotifyPropertyChanged
     {
         private readonly IRepository<Feedback> _feedbackRepository;
         public IRelayCommand SubmitFeedbackCommand { get; }
@@ -40,6 +40,17 @@ namespace FjernVarmeFyn.ViewModels
             }
         }
 
+        private bool _isEditable = true;
+        public bool IsEditable
+        {
+            get => _isEditable;
+            set
+            {
+                _isEditable = value;
+                OnPropertyChanged(nameof(IsEditable));  
+            }
+        }
+
         private Feedback _currentFeedback;
         public Feedback CurrentFeedback
         {
@@ -48,6 +59,8 @@ namespace FjernVarmeFyn.ViewModels
             {
                 _currentFeedback = value;
                 OnPropertyChanged(nameof(CurrentFeedback));
+
+                IsEditable = _currentFeedback == null;
             }
         }
 

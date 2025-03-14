@@ -5,9 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FjernVarmeFyn.Views"
       xmlns:root="clr-namespace:FjernVarmeFyn"
+      xmlns:vm="clr-namespace:FjernVarmeFyn.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="2000"
       Title="UserSendFeedback">
+    
+    
     <Page.Resources>
         <!-- Common style for all navigation buttons -->
         <Style x:Key="NavButtonStyle" TargetType="{x:Type Button}">
@@ -238,8 +241,9 @@
                     <!-- User Priority Section -->
                     <GroupBox Header="Prioritet" Grid.Row="3" Grid.Column="0" Margin="5">
                         <ComboBox ItemsSource="{Binding FeedbackCriticalityList}" 
-                    SelectedItem="{Binding CurrentFeedback.Criticality, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    Margin="5" />
+                                  SelectedItem="{Binding CurrentFeedback.Criticality, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  IsEnabled="{Binding IsEditable, Mode=OneWay}"
+                                  Margin="5" />
                     </GroupBox>
 
                     <GroupBox Header="Type" Grid.Row="3" Grid.Column="1" Margin="5">

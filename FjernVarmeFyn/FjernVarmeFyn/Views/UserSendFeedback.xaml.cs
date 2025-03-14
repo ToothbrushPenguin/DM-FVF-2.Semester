@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using FjernVarmeFyn.Models;
 using FjernVarmeFyn.Persistance;
 using FjernVarmeFyn.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FjernVarmeFyn.Views
 {
@@ -25,48 +26,15 @@ namespace FjernVarmeFyn.Views
     /// </summary>
     public partial class UserSendFeedback : Page
     {
+        private readonly MainViewModel _mainViewModel;
         private Button _selectedButton = null;
         public ObservableCollection<TempFeedbackModel> FeedbackItems { get; set; }
 
         public UserSendFeedback()
         {
             InitializeComponent();
-
-            // Initialize the collection with some sample data
-            // In a real application, this would come from a database or service
-            FeedbackItems = new ObservableCollection<TempFeedbackModel>
-            {
-                new TempFeedbackModel
-                {
-                    Emne = "Problem med login",
-                    Ticket = "T-1001",
-                    System = "Login",
-                    Status = "Åben",
-                    AdminPriority = "2",
-                    Priority = "5"
-                },
-                new TempFeedbackModel
-                {
-                    Emne = "Fejl i rapportmodul",
-                    Ticket = "T-1002",
-                    System = "Rapporter",
-                    Status = "Under behandling",
-                    AdminPriority = "1",
-                    Priority = "3"
-                },
-                new TempFeedbackModel
-                {
-                    Emne = "Forslag til ny funktion",
-                    Ticket = "T-1003",
-                    System = "Dashboard",
-                    Status = "Åben",
-                    AdminPriority = "3",
-                    Priority = "4"
-                }
-            };
-
-            IRepository<Feedback> feedbackRepository = new FeedbackRepository("Server=localhost\\SQLEXPRESS;Database=feedbacktest;Trusted_Connection=True;TrustServerCertificate=true");
-            this.DataContext = new FeedbackViewModel(feedbackRepository);
+            _mainViewModel = App.ServiceProvider.GetRequiredService<MainViewModel>();
+            DataContext = _mainViewModel.FeedbackViewModel;
         }
 
         private void FeedBack_Click(object sender, RoutedEventArgs e)
@@ -85,7 +53,9 @@ namespace FjernVarmeFyn.Views
                 Frame parentFrame = Window.GetWindow(this)?.FindName("MainFrame") as Frame;
                 if (parentFrame != null)
                 {
-                    parentFrame.Navigate(new UserSendFeedback());
+                    UserSendFeedback userSendFeedback = new UserSendFeedback();
+                    userSendFeedback.DataContext = _mainViewModel.FeedbackViewModel;
+                    parentFrame.Navigate(userSendFeedback);
                 }
                 else
                 {

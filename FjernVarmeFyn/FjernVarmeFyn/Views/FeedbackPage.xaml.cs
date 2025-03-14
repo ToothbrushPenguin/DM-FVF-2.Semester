@@ -27,8 +27,7 @@ namespace FjernVarmeFyn.Views
         public FeedbackPage()
         {
             InitializeComponent();
-            IRepository<Feedback> feedbackRepository = new FeedbackRepository("Server=.\\SQLEXPRESS;Database=feedbacktest;Integrated Security=True;");
-            this.DataContext = new FeedbackViewModel(feedbackRepository);
+
         }
 
     }
