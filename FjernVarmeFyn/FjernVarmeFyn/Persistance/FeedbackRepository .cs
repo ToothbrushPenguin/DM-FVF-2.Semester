@@ -106,23 +106,6 @@ namespace FjernVarmeFyn.Persistance
             }
         }
 
-        public void UpdateAdminCriticality(int feedbackID, Criticality adminCriticality)
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                SqlCommand command = new SqlCommand(
-                    "UPDATE Feedback SET AdminCriticality = @AdminCriticality WHERE FeedbackID = @FeedbackID",
-                    connection
-                );
-
-                command.Parameters.AddWithValue("@FeedbackID", feedbackID);
-                command.Parameters.AddWithValue("@AdminCriticality", adminCriticality.ToString());
-
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-        }
-
         public void Create(Feedback entity)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
