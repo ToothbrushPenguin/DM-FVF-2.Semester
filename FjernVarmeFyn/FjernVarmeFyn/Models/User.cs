@@ -11,7 +11,9 @@ namespace FjernVarmeFyn.Models
         public int? UserID = 0;
         public string? UserName { get; set; }
         public string? Password { get; set; }
-        public string ?AccessLevel { get; set; }
+        public string? Email { get; set; }
+        public string? PhoneNR { get; set; }
+        public Group? Group { get; set; }
 
         public User()
         {

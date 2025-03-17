@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using FjernVarmeFyn.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FjernVarmeFyn.Models
+namespace FjernVarmeFyn.Persistance
 {
     public class ProgramRepository
     {
@@ -59,7 +60,7 @@ namespace FjernVarmeFyn.Models
                 SqlCommand cmd = new SqlCommand("SELECT ID, Description, systemUser FROM PROGRAMS WHERE ProgramID = @ID", con);
                 cmd.Parameters.AddWithValue("@ID", ID);
 
-                using (SqlDataReader dr =  cmd.ExecuteReader())
+                using (SqlDataReader dr = cmd.ExecuteReader())
                 {
                     readProgram = new Program();
                     {
