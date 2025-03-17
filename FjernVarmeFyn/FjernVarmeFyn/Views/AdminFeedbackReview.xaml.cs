@@ -20,11 +20,37 @@ namespace FjernVarmeFyn.Views
     /// </summary>
     public partial class AdminFeedbackReview : Page
     {
+        private Button _selectedButton = null;
         public AdminFeedbackReview()
         {
             InitializeComponent();
         }
 
-        
+        private void FeedBack_Click(object sender, RoutedEventArgs e)
+        {
+            {
+                if (_selectedButton != null)
+                    _selectedButton.Background = Brushes.Black;
+
+                // Set new button color
+                Button clickedButton = sender as Button;
+                if (clickedButton != null)
+                {
+                    clickedButton.Background = Brushes.Red;
+                    _selectedButton = clickedButton;
+
+                    // Get the parent frame dynamically
+                    Frame parentFrame = Window.GetWindow(this)?.FindName("MainFrame") as Frame;
+                    if (parentFrame != null)
+                    {
+                        parentFrame.Navigate(new UserSendFeedback());
+                    }
+                    else
+                    {
+                        MessageBox.Show("MainFrame not found!");
+                    }
+                }
+            }
+        }
     }
 }
