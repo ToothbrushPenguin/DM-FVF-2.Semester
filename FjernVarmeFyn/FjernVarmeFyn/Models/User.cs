@@ -13,13 +13,9 @@ namespace FjernVarmeFyn.Models
         public string? Password { get; set; }
         public string ?AccessLevel { get; set; }
 
-        ////public User(string userName, string password, string accessLevel)
-        ////{
-        ////    UserID++;
-        ////    UserName = userName;
-        ////    Password = password;
-        ////    AccessLevel = accessLevel;
-        ////}
-        //public User() { }
+        public User()
+        {
+            UserID++;
+        }
     }
 }

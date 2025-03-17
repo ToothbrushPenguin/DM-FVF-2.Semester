@@ -27,6 +27,11 @@ namespace FjernVarmeFyn.Models
         public void Create(string userName, string password, string accessLevel)
         {
             User newUser = new User();
+            {
+                newUser.UserName = userName;
+                newUser.Password = password;
+                newUser.AccessLevel = accessLevel;
+            }
             
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
@@ -69,7 +74,7 @@ namespace FjernVarmeFyn.Models
             return readUser;
         }
 
-        public List<User> GetUsers()
+        public List<User> GetAll()
         {
             using (SqlConnection Con = new SqlConnection(ConnectionString))
             {
