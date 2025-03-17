@@ -42,14 +42,17 @@ namespace FjernVarmeFyn.Views
             if (_selectedButton != null)
                 _selectedButton.Background = Brushes.Black;
 
-            // Set new button color
+
             Button clickedButton = sender as Button;
             if (clickedButton != null)
             {
                 clickedButton.Background = Brushes.Red;
                 _selectedButton = clickedButton;
 
-                // Get the parent frame dynamically
+                
+                _mainViewModel.FeedbackViewModel.ResetCurrentFeedback();
+
+             
                 Frame parentFrame = Window.GetWindow(this)?.FindName("MainFrame") as Frame;
                 if (parentFrame != null)
                 {
@@ -63,6 +66,7 @@ namespace FjernVarmeFyn.Views
                 }
             }
         }
+
 
     }
 }

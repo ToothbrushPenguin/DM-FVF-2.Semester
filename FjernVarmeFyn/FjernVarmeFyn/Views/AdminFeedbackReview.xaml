@@ -70,48 +70,14 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Group Filter -->
-                <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="0,0,15,0">
-                    <TextBlock Text="Gruppe:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <ComboBox Width="100" SelectedIndex="0">
-                        <ComboBoxItem Content="Alle"/>
-                        <ComboBoxItem Content="Gruppe 1"/>
-                        <ComboBoxItem Content="Gruppe 2"/>
-                        <ComboBoxItem Content="Gruppe 3"/>
-                    </ComboBox>
-                </StackPanel>
-
-                <!-- System Filter -->
-                <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="0,0,15,0">
-                    <TextBlock Text="System:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <ComboBox Width="100" SelectedIndex="0">
-                        <ComboBoxItem Content="Alle"/>
-                        <ComboBoxItem Content="System 1"/>
-                        <ComboBoxItem Content="System 2"/>
-                        <ComboBoxItem Content="System 3"/>
-                    </ComboBox>
-                </StackPanel>
-
                 <!-- Type Filter (Wishes/Feedback) -->
-                <StackPanel Orientation="Horizontal" Grid.Column="2" Margin="0,0,15,0">
-                    <TextBlock Text="Type:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <ComboBox Width="100" SelectedIndex="0">
-                        <ComboBoxItem Content="Alle"/>
-                        <ComboBoxItem Content="Ønsker"/>
-                        <ComboBoxItem Content="Feedback"/>
-                    </ComboBox>
+                <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="0,0,15,0">
+                    <TextBlock Text="Sortering:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ComboBox Width="141" 
+  ItemsSource="{Binding SortOptions}" 
+  SelectedItem="{Binding SelectedSortOption, Mode=TwoWay}" />
                 </StackPanel>
 
-                <!-- Status Filter -->
-                <StackPanel Orientation="Horizontal" Grid.Column="3">
-                    <TextBlock Text="Status:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <ComboBox Width="100" SelectedIndex="0">
-                        <ComboBoxItem Content="Alle"/>
-                        <ComboBoxItem Content="Åben"/>
-                        <ComboBoxItem Content="Lukket"/>
-                        <ComboBoxItem Content="Under behandling"/>
-                    </ComboBox>
-                </StackPanel>
             </Grid>
 
             <!-- ListView with auto-height rows -->

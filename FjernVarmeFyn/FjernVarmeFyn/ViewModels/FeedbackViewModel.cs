@@ -13,6 +13,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using Microsoft.Data.SqlClient;
+using System.Windows.Data;
+using System.Runtime.CompilerServices;
 
 
 
@@ -29,6 +31,28 @@ namespace FjernVarmeFyn.ViewModels
         public List<FeedbackStatus> FeedbackStatusList { get; } = Enum.GetValues(typeof(FeedbackStatus)).Cast<FeedbackStatus>().ToList();
         public List<Criticality> FeedbackCriticalityList { get; } = Enum.GetValues(typeof(Criticality)).Cast<Criticality>().ToList();
         public List<FeedbackType> FeedbackTypeList { get; } = Enum.GetValues(typeof(FeedbackType)).Cast<FeedbackType>().ToList();
+        public ICollectionView FilteredFeedbackList { get; private set; }
+
+        private string _selectedSortOption;
+        public string SelectedSortOption
+        {
+            get => _selectedSortOption;
+            set
+            {
+                _selectedSortOption = value;
+                OnPropertyChanged();
+                ApplySorting();
+            }
+        }
+
+        public List<string> SortOptions { get; } = new List<string>
+        {
+         "Ingen Sortering",
+         "FeedbackID Stigende",
+         "FeedbackID Faldende",
+        "Type",
+        "Status"
+    };
 
         public ObservableCollection<Feedback> FeedbackList
         {
@@ -48,6 +72,18 @@ namespace FjernVarmeFyn.ViewModels
             {
                 _isEditable = value;
                 OnPropertyChanged(nameof(IsEditable));  
+            }
+        }
+
+        private FeedbackType _selectedType;
+        public FeedbackType SelectedType
+        {
+            get { return _selectedType; }
+            set
+            {
+                _selectedType = value;
+                OnPropertyChanged();
+                ApplySorting(); // Call the method that filters/sorts
             }
         }
 
@@ -105,6 +141,10 @@ namespace FjernVarmeFyn.ViewModels
             SubmitFeedbackCommand = new RelayCommand(AddFeedback);
             DeleteFeedbackCommand = new RelayCommand<Feedback>(DeleteFeedback);
             FeedbackList = new ObservableCollection<Feedback>(_feedbackRepository.GetAll());
+
+            FilteredFeedbackList = CollectionViewSource.GetDefaultView(FeedbackList);
+
+            ApplySorting();
         }
 
         private void AddFeedback()
@@ -178,12 +218,46 @@ namespace FjernVarmeFyn.ViewModels
             }
         }
 
+        public void ResetCurrentFeedback()
+        {
+            CurrentFeedback = new Feedback();  // Resets CurrentFeedback
+            SelectedFeedback = null;           // Clears SelectedFeedback
+        }
+
+
+        public void ApplySorting()
+        {
+            if (FilteredFeedbackList == null) return;
+
+            FilteredFeedbackList.SortDescriptions.Clear();
+
+            switch (SelectedSortOption)
+            {
+                case "FeedbackID Stigende":
+                    FilteredFeedbackList.SortDescriptions.Add(new SortDescription(nameof(Feedback.FeedbackID), ListSortDirection.Ascending));
+                    break;
+                case "FeedbackID Faldende":
+                    FilteredFeedbackList.SortDescriptions.Add(new SortDescription(nameof(Feedback.FeedbackID), ListSortDirection.Descending));
+                    break;
+                case "Type":
+                    FilteredFeedbackList.SortDescriptions.Add(new SortDescription(nameof(Feedback.Type), ListSortDirection.Ascending));
+                    break;
+                case "Status":
+                    FilteredFeedbackList.SortDescriptions.Add(new SortDescription(nameof(Feedback.Status), ListSortDirection.Ascending));
+                    break;
+            }
+
+            // Refresh the view to apply sorting
+            FilteredFeedbackList.Refresh();
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }
