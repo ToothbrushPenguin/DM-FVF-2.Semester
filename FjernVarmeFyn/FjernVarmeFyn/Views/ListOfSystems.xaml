@@ -130,13 +130,13 @@
 
                 <!-- Sample items for design-time preview - these will be replaced by proper data binding -->
                 <ListViewItem>
-                    <root:TempFeedbackModel Emne="Problem med login" Ticket="T-1001" System="Login" Status="Åben" AdminPriority="2" Priority="5"/>
+                    <root:TempFeedbackModel Emne="Løn" Ticket="HR" System="Login" Status="Åben" AdminPriority="2" Priority="5"/>
                 </ListViewItem>
                 <ListViewItem>
-                    <root:TempFeedbackModel Emne="Fejl i rapportmodul" Ticket="T-1002" System="Rapporter" Status="Under behandling" AdminPriority="1" Priority="3"/>
+                    <root:TempFeedbackModel Emne="Elkeddel" Ticket="Produktion" System="Rapporter" Status="Under behandling" AdminPriority="1" Priority="3"/>
                 </ListViewItem>
                 <ListViewItem>
-                    <root:TempFeedbackModel Emne="Forslag til ny funktion - meget lang beskrivelse der skal vises korrekt i listen og ikke blive afkortet" Ticket="T-1003" System="Dashboard" Status="Åben" AdminPriority="3" Priority="4"/>
+                    <root:TempFeedbackModel Emne="Servere" Ticket="Infrastuktur" System="Dashboard" Status="Åben" AdminPriority="3" Priority="4"/>
                 </ListViewItem>
             </ListView>
 
